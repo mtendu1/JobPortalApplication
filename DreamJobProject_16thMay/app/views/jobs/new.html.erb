@@ -1,0 +1,81 @@
+
+<%= form_for @job do |f| -%>
+
+    <div class="control-group">
+      <%= f.label :Company_Name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :company_name, :class => 'form-control' %>
+      </div>
+      <%= error_span(@job[:company_name]) %>
+    </div>
+
+
+    <div class="control-group">
+      <%= f.label :Job_Title, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :job_title, :class => 'form-control' %>
+      </div>
+      <%= error_span(@job[:job_title]) %>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :Job_Code, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :job_code, :class => 'form-control' %>
+      </div>
+      <%= error_span(@job[:job_code]) %>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :Job_Location, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :job_location, :class => 'form-control' %>
+      </div>
+      <%= error_span(@job[:job_location]) %>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :Job_Description, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :job_description, :class => 'form-control' %>
+      </div>
+      <%= error_span(@job[:job_description]) %>
+    </div>
+
+
+    <div class="control-group">
+      <%= f.label :Job_Type, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select(:job_type, ['Full-Time', 'Part-Time', 'Internship']) %>
+      </div>
+      <%= error_span(@job[:job_type]) %>
+    </div>
+
+
+
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+
+
+
+<% end -%>
+
+<hr>
+Display Jobs</br>
+
+<% if !@jobs.blank? && @jobs = Job.where(employer_id: current_user)%>
+    <% for item in @jobs do %>
+
+
+        <%= item.company_name %> <%= item.job_title %> <%= item.job_code %> <%= item.job_location %>  <%= item.job_description %>  <%= item.job_type %>  <br />
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                    edit_job_path(item), :class => 'btn btn-default btn-xs' %>
+        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                    job_path(item),
+                    :method => :delete,
+                    :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                    :class => 'btn btn-xs btn-danger' %>
+
+    <%end%>
+
+<%else%>
+<%end%>

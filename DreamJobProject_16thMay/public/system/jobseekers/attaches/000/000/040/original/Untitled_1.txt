@@ -1,0 +1,49 @@
+﻿Job Controller:
+class JobsController < ApplicationController
+
+  def new
+    @job = Job.new
+    @jobs = Job.all
+  end
+
+
+
+
+def create
+  @job = Job.new(job_params)
+
+  respond_to do |format|
+    if @job.save
+      
+      format.html {redirect_to new_job_path,notice: 'Job opening was successfully posted.'}
+
+    else
+      format.html {render :new}
+
+    end
+  end
+  end
+
+  def update
+    respond_to do |format|
+      if @job.update(job_params)
+        format.html {redirect_to @job,notice: 'Job opening was successfully updated.'}
+
+      else
+        format.html {render :new}
+
+      end
+    end
+  end
+
+def show
+ #render :template => 'new'
+end
+
+private
+def job_params
+  params.require(:job).permit(:company_name, :job_title, :job_code, :job_description,:job_location, :job_type)
+end
+
+  end
+

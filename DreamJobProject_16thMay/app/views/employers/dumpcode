@@ -1,0 +1,71 @@
+<%= form_for @employer, :html => { :class => "form-horizontal employer" } do |f| %>
+
+    <% if @employer.errors.any? %>
+        <div id="error_expl" class="panel panel-danger">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= pluralize(@employer.errors.count, "error") %> prohibited this employer from being saved:</h3>
+          </div>
+          <div class="panel-body">
+            <ul>
+              <% @employer.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+    <% end %>
+
+    <div class="control-group">
+      <%= f.label :Job_Title, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Job_Title, :class => 'form-control' %>
+      </div>
+      <%= error_span(@employer[:Job_Title]) %>
+    </div>
+
+    <div class="Job_Description">
+      <%= f.label :Job_Title, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Job_Description, :class => 'form-control' %>
+      </div>
+      <%= error_span(@employer[:Job_Description]) %>
+    </div>
+
+    <div class="Job_Location">
+      <%= f.label :Job_Title, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Job_Location, :class => 'form-control' %>
+      </div>
+      <%= error_span(@employer[:Job_Location]) %>
+    </div>
+
+    <div class="Required_Skills">
+      <%= f.label :Job_Title, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Required_Skills, :class => 'form-control' %>
+      </div>
+      <%= error_span(@employer[:Required_Skills]) %>
+    </div>
+
+
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                employers_path, :class => 'btn btn-default' %>
+
+                <%= link_to 'Post a Job',
+                            postjob_employers_path, :class => 'btn btn-default' %>
+
+
+    <%= link_to 'Post a Job',
+                postjob_employers_path, :class => 'btn btn-default' %>
+
+                <%= button_to "PostJob", postjob_employer_path, :class => "button", :method => :get %>
+
+
+    <%= form_for @employer, :html => { :class => "form-horizontal employer" } do |f| %>
+<% form_for(:employer, :url => employer_postjob_path, :remote => true, :html => {:method => :post, :class => "form-horizontal employer"}) do |f| %>
+
+
+
+
+<% end %>

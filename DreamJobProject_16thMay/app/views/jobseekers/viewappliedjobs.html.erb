@@ -1,0 +1,11 @@
+View Applied Jobs
+        <% if @appliedjobs.present? %>
+    <% for item in @appliedjobs do %>
+
+
+        <%= item.jobseeker_id %> <%= item.job_id %></br>
+
+
+
+    <%end%>
+<%end%>
